@@ -206,6 +206,22 @@ patternId = 1;
 
 
 
+for i  = 1:m
+    for j = 1 : n
+        data(patternId,1) = patternId; % 数据编号
+        data(patternId,2) = j/n; % 工件号
+        data(patternId,3) = ptime_of_mashine(i)/avetime_mashine; % 工件负载
+        data(patternId,4) = ptime_of_job(j)/avetime_job; % 机器负载
+        data(patternId,5) = T(i,j)/ptime_of_mashine(i) * m; % 相对机器的时间消耗
+        data(patternId,6) = T(i,j)/ptime_of_job(i) * n; % 相对工件的时间消耗 
+        data(patternId,7) = find( P( j , : ) == i ) / m;  % 工件的工序
+%         data(patternId,8) = T(i,j)/ptime_of_job(i) * n; % 相对工件的时间消耗 
+        data(patternId,8) = myfind( Xstr,i,j,n,m ) / m/n; % 相对工件的时间消耗 
+        patternId = patternId+1;      
+    end
+end
+
+
 end
 
 function youxianji = myfind( Xstr , i , j ,n,m)
